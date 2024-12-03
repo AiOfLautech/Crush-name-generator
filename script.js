@@ -36,7 +36,7 @@ function generateDefinition() {
             const randomDefinition = definitions[letter][Math.floor(Math.random() * definitions[letter].length)];
             output += `<div><span class="letter">${letter}</span> - <span class="definition">${randomDefinition}</span></div>`;
         } else {
-            output += `<div><span class="letter">${letter}</span> - <span class="definition">No definition found</span></div>`;
+            output += `<div><span class="letter">${letter}</span> - <span class="definition">No definition found 🤔</span></div>`;
         }
     }
     document.querySelector('.output').innerHTML = output;
