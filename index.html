@@ -4,15 +4,195 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crush Name Definition Generator</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Linking the external CSS file -->
+    <style>
+        /* Glowing white background around body */
+        body {
+            background: linear-gradient(135deg, #ff7e5f, #feb47b, #ff6a88, #d4a5a5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-size: cover;
+            background-attachment: fixed;
+            animation: glowingBackground 5s ease-in-out infinite;
+            color: white;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.8); /* White glowing around the body */
+        }
+
+        /* Glowing effect animation for background */
+        @keyframes glowingBackground {
+            0% {
+                filter: brightness(1) hue-rotate(0deg);
+            }
+            50% {
+                filter: brightness(1.3) hue-rotate(180deg);
+            }
+            100% {
+                filter: brightness(1) hue-rotate(360deg);
+            }
+        }
+
+        /* Glowing container */
+        .container {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+            padding: 20px;
+            max-width: 400px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            animation: glowingContainer 3s ease-in-out infinite;
+        }
+
+        /* Glowing animation for container */
+        @keyframes glowingContainer {
+            0% {
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(255, 255, 255, 1);
+            }
+            100% {
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            }
+        }
+
+        /* Glowing text for the title */
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #ff1493;
+            text-shadow: 0 0 15px #ff1493, 0 0 30px #ff1493, 0 0 45px #ff1493;
+        }
+
+        /* Glowing input field */
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 2px solid #1e90ff;
+            margin-bottom: 20px;
+            font-size: 16px;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            box-shadow: 0 0 10px rgba(30, 144, 255, 0.7);
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            box-shadow: 0 0 20px rgba(30, 144, 255, 1);
+        }
+
+        /* Glowing button */
+        button {
+            background-color: #32cd32;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            box-shadow: 0 0 10px rgba(50, 205, 50, 0.7);
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #228b22;
+            box-shadow: 0 0 20px rgba(50, 205, 50, 1);
+        }
+
+        /* Glowing output text */
+        .output {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #ff4500;
+            text-shadow: 0 0 10px #ff4500, 0 0 20px #ff4500, 0 0 30px #ff4500;
+            line-height: 1.5;
+            padding: 10px;
+        }
+
+        /* Glowing letter and definition */
+        .letter {
+            font-weight: bold;
+            color: #ff1493;
+            text-shadow: 0 0 10px #ff1493, 0 0 20px #ff1493, 0 0 30px #ff1493;
+        }
+
+        .definition {
+            font-style: italic;
+            color: #ff1493;
+            text-shadow: 0 0 10px #ff1493, 0 0 20px #ff1493, 0 0 30px #ff1493;
+        }
+
+        /* Add glow to emojis in the header */
+        h1 span {
+            font-size: 30px;
+            text-shadow: 0 0 10px #ff1493, 0 0 20px #ff1493, 0 0 30px #ff1493;
+        }
+
+        /* Add spacing for better layout */
+        .container input, .container button {
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>Crush Name Definition</h1>
-        <input type="text" id="nameInput" placeholder="Enter your crush's name">
-        <button>Generate Definition</button>
+        <h1>Crush Name Definition 💖</h1>
+        <input type="text" id="nameInput" placeholder="Enter your crush's name 👤">
+        <button>Generate Definition ✨</button>
         <div class="output" id="output"></div>
     </div>
-    <script src="script.js"></script> <!-- Linking the external JavaScript file -->
+    <script>
+       const definitions = {
+    A: ["Amazingly Wonderful", "Always on My Mind", "Angel of My Dreams"],
+    B: ["Best Part of My Life", "Beautiful Soul", "Brilliant and Bright"],
+    C: ["Charming and Charismatic", "Cherished Forever", "Center of My World"],
+    D: ["Dear to My Heart", "Dream Come True", "Delightful Presence"],
+    E: ["Endless Love", "Enchanting Smile", "Eternal Sunshine"],
+    F: ["Forever in My Heart", "Fabulous and Fun", "Faithful Companion"],
+    G: ["Gift from Above", "Gorgeous and Gracious", "Golden Heart"],
+    H: ["Heart of Gold", "Happiness in My Life", "Heavenly Presence"],
+    I: ["Irreplaceable Love", "Incredible Soul", "Inspiration in My Life"],
+    J: ["Joy of My Life", "Jewel of My Heart", "Just Perfect"],
+    K: ["Kind and Caring", "Key to My Happiness", "Knight in Shining Armor"],
+    L: ["Love of My Life", "Lovely and Loyal", "Luminous Star"],
+    M: ["Magical Moments", "My True Love", "Miracle in My Life"],
+    N: ["Never-ending Love", "Nicest Person Ever", "Not Just a Crush"],
+    O: ["Only You", "One of a Kind", "Outstandingly Special"],
+    P: ["Precious and Pure", "Perfect in Every Way", "Peace of My Heart"],
+    Q: ["Queen of My Heart", "Quintessential Beauty", "Quiet Strength"],
+    R: ["Radiant Smile", "Reason for My Joy", "Rare Gem"],
+    S: ["Soulmate Forever", "Sweetest Love", "Source of My Happiness"],
+    T: ["Treasure of My Life", "True Love", "Tender and Loving"],
+    U: ["Unconditionally Loved", "Unforgettable", "Universe's Gift"],
+    V: ["Valuable Beyond Measure", "Very Special", "Vibrant Love"],
+    W: ["Wonderful Person", "Wish Come True", "Warm Heart"],
+    X: ["X-factor in My Life", "Xtraordinary Love", "XOXO (Hugs and Kisses)"],
+    Y: ["You Are My Everything", "Yours Forever", "Youthful Spirit"],
+    Z: ["Zeal of My Life", "Zest for Life", "Zillion Reasons to Love You"]
+};
+
+function generateDefinition() {
+    const name = document.getElementById("nameInput").value.toUpperCase();
+    let output = "";
+    for (let i = 0; i < name.length; i++) {
+        const letter = name[i];
+        if (definitions[letter]) {
+            const randomDefinition = definitions[letter][Math.floor(Math.random() * definitions[letter].length)];
+            output += `<div><span class="letter">${letter}</span> - <span class="definition">${randomDefinition}</span></div>`;
+        } else {
+            output += `<div><span class="letter">${letter}</span> - <span class="definition">No definition found 🤔</span></div>`;
+        }
+    }
+    document.querySelector('.output').innerHTML = output;
+}
+
+document.querySelector('button').addEventListener('click', generateDefinition);
+    </script>
 </body>
-</html>
+    </html>
